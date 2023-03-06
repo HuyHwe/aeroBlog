@@ -11,18 +11,14 @@ const path = require('path');
 //     user: "postgres",
 // })
 const db = require("./models");
-const {user} = require("./models");
+const {user, review} = require("./models");
 env.config();
 const PORT = process.env.PORT;
 const connectionString = process.env.DATABASE_URL;
 
-app.get("/getuser", (req, res, next) => {
-    user.findAll().catch(err => {
-        console.log(err);
-    })
-})
+
 db.sequelize.sync().then((req) => {
     app.listen(PORT, () => {
-        console.log("listening to port: " + PORT);
+        console.log("\nlistening to port: " + PORT);
     })
 })
