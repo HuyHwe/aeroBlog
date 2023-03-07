@@ -1,0 +1,79 @@
+* {
+    font-family: 'Roboto Mono', monospace;
+    color:white;
+    padding: 0;
+    margin: 0;
+    color: inherit;
+}
+body {
+    background-color: rgb(16,16,16);
+}
+
+#head {
+    height: 22vh;
+}
+
+#title {
+    background-color: white;
+    padding: 1em;
+    color: black;
+    text-align: center;
+}
+
+#title:hover, nav a:hover{
+    background-color: black;
+    color: white;
+    transition:cubic-bezier(0.075, 0.82, 0.165, 1) 500ms;
+}
+
+#nav-bar {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#nav-bar a {
+    color: black;
+    width: 25%;
+    height: 6vh;
+    border: solid black 3px;
+    border-right: 1.5px;
+    text-align: center;
+    padding-top: 2%;
+    text-decoration: none;
+}
+
+div.description {
+    height: 60vh;
+
+} 
+
+div.light {
+    background-color: white;
+    color: black;
+}
+
+div.dark {
+    background-color: inherit;
+    color: white;
+}
+
+div.info {
+    width: 40vw;
+    padding: 1em;
+    padding-top: 3em;
+    position: absolute;
+}
+
+div.left {
+    left: 0;
+    text-align: left;
+}
+div.right {
+    right: 0;
+    text-align: right;
+}
+
+div.big {
+    height: 78vh;
+}
