@@ -17,6 +17,11 @@ env.config();
 const PORT = process.env.PORT;
 const connectionString = process.env.DATABASE_URL;
 app.use(bodyParser.urlencoded({extended: false}));
+app.set("view engine", 'ejs');
+
+app.get("/home", (req, res, next) => {
+    res.render('index');
+})
 app.post("/sign-in", async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
