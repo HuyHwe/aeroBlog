@@ -1,7 +1,7 @@
 const passport = require("passport");
 const bcrypt = require("bcrypt");
 const LocalStrategy = require("passport-local").Strategy;
-const {getUserByUsername} = require("utils");
+const {getUserByUsername} = require("./utils");
 passport.use(new LocalStrategy(
     function(username, password,done) {
         const user = getUserByUsername(username);
@@ -23,3 +23,5 @@ passport.use(new LocalStrategy(
         }
     }
 ))
+
+module.exports = passport;

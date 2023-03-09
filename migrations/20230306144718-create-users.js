@@ -6,13 +6,10 @@ const { sequelize } = require('../models');
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
-      id: {
-        type: sequelize.INTEGER
-      },
       username: {
         type: Sequelize.STRING,
-        primaryKey: true,
         allowNull: false,
+        primaryKey:true,
         validate: {
           notEmpty: true
         }
@@ -31,7 +28,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    return queryInterface.removeColumn("id");
     await queryInterface.dropTable('users');
   }
   
