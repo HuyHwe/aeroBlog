@@ -29,10 +29,10 @@ app.use(passport.session());
 app.get("/index", (req, res, next) => {
     res.render('index');
 })
-app.get("/sign-in", (req, res, next) => {
-    res.render("signin");
+app.get("/signin", (req, res, next) => {
+    res.render("signin", {data:{}});
 })
-app.post("/sign-in", async (req, res, next) => {
+app.post("/signin", async (req, res, next) => {
     const username = req.body.username;
     let password = req.body.password;
     const retypePassword = req.body.retypePassword;
@@ -48,7 +48,9 @@ app.post("/sign-in", async (req, res, next) => {
         const newUser = await createNewUser(username, password);
         console.log(newUser);
         if (newUser) {
-            res.send("user created successfully");
+            res.render('login', {data:{createUser:true}});
+        } else {
+            res.render('signin', {data:{usernameExisted:true}});
         }
     } catch(e) {
         if (e) {
@@ -56,7 +58,9 @@ app.post("/sign-in", async (req, res, next) => {
         }
     }
 })
-
+app.get("/login", (req, res, next) => {
+    res.render('login', {data:{}});
+})
 db.sequelize.authenticate().then((req) => {
     app.listen(PORT, () => {
         console.log("\nlistening to port: " + PORT);

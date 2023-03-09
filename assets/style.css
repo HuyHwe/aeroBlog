@@ -88,5 +88,14 @@ div.big {
 }
 
 form {
+    margin-top: 1em;
+    color: white;
+}
+
+form input {
+    color: black
+}
+
+div.whiteText {
     color: white;
 }
