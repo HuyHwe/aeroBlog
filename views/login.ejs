@@ -22,16 +22,13 @@
       <nav id="nav-bar">
         <a href="/about">About</a>
         <a href="/reviews">Reviews</a>
-        <a href="/log-in">Login</a>
-        <a href="/sign-in">Signin</a>
+        <a href="/login">Login</a>
+        <a href="/signin">Signin</a>
       </nav>
     </div>
 
     <div class="whiteText">
-        <% if (data.createUser) { %>
-            <h2>User Created!</h2>
-        <% } %>
-        <form action="signin", method="post">
+        <form action="login", method="post">
           <h2>Login</h2>
           <label for="username">Username:</legend>
           <input type="text" id="username" name="username">

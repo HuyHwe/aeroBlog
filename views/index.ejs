@@ -22,10 +22,13 @@
       <nav id="nav-bar">
         <a href="/about">About</a>
         <a href="/reviews">Reviews</a>
-        <a href="/log-in">Login</a>
-        <a href="/sign-in">Signin</a>
+        <a href="/login">Login</a>
+        <a href="/signin">Signin</a>
       </nav>
     </div>
+    <% if (data.created) { %>
+      <h2 style="color:white">User Created!</h2>
+  <% } %>
     <div class="description big dark">
       <div class="info  left">
         <h2>aeroBlog là gì?</h2>
