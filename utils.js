@@ -1,13 +1,14 @@
 module.exports = {
     getUserByUsername,
-    createNewUser
+    createNewUser,
+    checkAuth,
+    getAllReviewsByUsername
 }
 const db = require("./models");
-const {users} = require("./models");
+const {users, reviews} = require("./models");
 
 function getUserByUsername(userName) {
     user = users.findOne({where: {username:userName}});
-    console.log(user);
     return user;
 }
 
@@ -19,4 +20,16 @@ async function createNewUser(username, password) {
         user = await users.create({username, password});
         return user;
     }
+}
+
+function checkAuth(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    }
+    res.redirect("/login");
+}
+
+function getAllReviewsByUsername(username) {
+    const review = reviews.findAll({where:{users_username: username}});
+    return review;
 }

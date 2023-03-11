@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   reviews.init({
     title: DataTypes.STRING,
     body: DataTypes.STRING,
-    rating: DataTypes.INTEGER
+    rating: DataTypes.INTEGER,
+    image: DataTypes.STRING
   }, {
     sequelize,
     tableName: "reviews",

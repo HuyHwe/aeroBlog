@@ -37,7 +37,7 @@ body {
     width: 25%;
     height: 6vh;
     border: solid black 3px;
-    border-right: 1.5px;
+    /* border-right: 1.5px; */
     text-align: center;
     padding-top: 2%;
     text-decoration: none;

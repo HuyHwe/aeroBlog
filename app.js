@@ -10,7 +10,7 @@ const db = require("./models");
 const {users, reviews} = require("./models");
 const passport = require("passport");
 const initializePassport = require("./passport-config");
-const { createNewUser } = require("./utils");
+const { createNewUser , checkAuth, getAllReviewsByUsername } = require("./utils");
 const session = require("express-session");
 env.config();
 const PORT = process.env.PORT;
@@ -30,7 +30,11 @@ app.use(passport.session());
 initializePassport(passport);
 // Trang đầu
 app.get("/index", (req, res, next) => {
-    res.render('index', {data:{}});
+    if (req.user != null) {
+        res.render('index', {data:{user:req.user}});
+    } else {
+        res.render('index', {data:{}});
+    }
 })
 app.get("/signin", (req, res, next) => {
     res.render("signin", {data:{}});
@@ -65,8 +69,12 @@ app.get("/login", (req, res, next) => {
 })
 app.post("/login",  passport.authenticate('local', { failureRedirect: '/login' }),
 function(req, res) {
-  res.redirect('/index');
+  res.redirect('/profile');
 });
+
+app.get("/profile", checkAuth,async (req, res, next) => {
+    res.render("profile", {data:{username: req.user.username, reviews:await getAllReviewsByUsername(req.user.username)}});
+})
 
 
 db.sequelize.authenticate().then((req) => {
