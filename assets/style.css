@@ -98,4 +98,36 @@ form input {
 
 div.whiteText {
     color: white;
+    margin: 5vw;
+}
+#add {
+    width: 100%;
+    height: 80vh;
+}
+
+#review-body {
+    width: 50%;
+    height: 50%;
+    color: black;
+}
+
+.clickBox {
+    width: 25vw;
+    height: 6vh;
+    color: black;
+    border: solid white 3px;
+    /* border-right: 1.5px; */
+    text-align: center;
+    text-decoration: none;
+}
+
+.clickBox:hover {
+    background-color: rgb(16,16,16);
+    color: white;
+    border: solid white 3px;
+}
+
+#add-img {
+    background-color: white;
+    color: black;
 }

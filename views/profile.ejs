@@ -20,15 +20,16 @@
         <h1>aeroBlog - review tất cả mọi thứ</h1>
       </div>
       <nav id="nav-bar">
+        <a href="/home">Home</a>
         <a href="/about">About</a>
         <a href="/reviews">Reviews</a>
         <a href="/profile">Profile</a>
       </nav>
     </div>
-
     <div class="whiteText">
         <h1>Greeting <% if(data.username != null) { %> <%= data.username %> <% } %>!</h1>
         <h2>Your review:</h2>
+        <a href="/add">Add Review +</a>
         <% if(data.reviews!=null) { %> <%= data.reviews %> <% } %>
     </div>
   </body>

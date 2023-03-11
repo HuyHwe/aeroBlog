@@ -2,7 +2,8 @@ module.exports = {
     getUserByUsername,
     createNewUser,
     checkAuth,
-    getAllReviewsByUsername
+    getAllReviewsByUsername,
+    addNewReview
 }
 const db = require("./models");
 const {users, reviews} = require("./models");
@@ -32,4 +33,9 @@ function checkAuth(req, res, next) {
 function getAllReviewsByUsername(username) {
     const review = reviews.findAll({where:{users_username: username}});
     return review;
+}
+
+function addNewReview(title, body, rating, image, users_username) {
+    reviews.create({title, body, rating, image, users_username});
+    return reviews;
 }

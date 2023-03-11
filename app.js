@@ -10,12 +10,28 @@ const db = require("./models");
 const {users, reviews} = require("./models");
 const passport = require("passport");
 const initializePassport = require("./passport-config");
-const { createNewUser , checkAuth, getAllReviewsByUsername } = require("./utils");
+const {
+    createNewUser,
+    checkAuth,
+    getAllReviewsByUsername,
+    addNewReview,
+
+} = require("./utils");
 const session = require("express-session");
 env.config();
 const PORT = process.env.PORT;
 const connectionString = process.env.DATABASE_URL;
-
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "images");
+    },
+    filename: (req, file, cb) => {
+        console.log(file);
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({storage: storage});
 app.use(bodyParser.urlencoded({extended: false}));
 app.use("/", express.static(__dirname + '/assets'));
 app.use(session ({
@@ -76,6 +92,15 @@ app.get("/profile", checkAuth,async (req, res, next) => {
     res.render("profile", {data:{username: req.user.username, reviews:await getAllReviewsByUsername(req.user.username)}});
 })
 
+app.get("/add", checkAuth, (req, res, next) => {
+    res.render("add");
+})
+
+app.post("/add", upload.single('img'),  (req, res, next) => {
+
+    addNewReview(req.body.title, req.body.body, req.body.rating, req.file.path, req.user.username);
+    res.redirect("/profile");
+})
 
 db.sequelize.authenticate().then((req) => {
     app.listen(PORT, () => {
