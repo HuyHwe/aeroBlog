@@ -7,7 +7,6 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const db = require("./models");
-const {users, reviews} = require("./models");
 const passport = require("passport");
 const initializePassport = require("./passport-config");
 const {
@@ -17,6 +16,7 @@ const {
     addNewReview,
     getReviewById,
     updateReviewById,
+    getAllReview,
 
 } = require("./utils");
 const session = require("express-session");
@@ -51,11 +51,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 initializePassport(passport);
 // Trang đầu
-app.get("/index", (req, res, next) => {
+app.get("/home", (req, res, next) => {
     if (req.user != null) {
-        res.render('index', {data:{user:req.user}});
+        res.render('home', {data:{user:req.user}});
     } else {
-        res.render('index', {data:{}});
+        res.render('home', {data:{}});
     }
 })
 app.get("/signin", (req, res, next) => {
@@ -76,7 +76,7 @@ app.post("/signin", async (req, res, next) => {
         const newUser = await createNewUser(username, password);
         console.log(newUser);
         if (newUser) {
-            res.render("index", {data:{created: true}})
+            res.render("home", {data:{created: true}})
         } else {
             res.render('signin', {data:{usernameExisted:true}});
         }
@@ -123,6 +123,11 @@ app.post("/edit",upload.single('img'), async (req, res, next) => {
     console.log(req.body, "\n\n");
     await updateReviewById(req.body.id,req.body.title, req.body.body, req.body.rating)
     res.redirect("/profile");
+});
+
+app.get("/reviews", async (req, res, next) => {
+    reviews = await getAllReview();
+    res.render("reviews", {data:{reviews:reviews}});
 })
 
 db.sequelize.authenticate().then((req) => {

@@ -97,7 +97,7 @@ form input {
 }
 
 div.whiteText {
-    color: white;
+    color: white !important;
     margin: 5vw;
 }
 #add {
@@ -143,4 +143,12 @@ div.whiteText {
     height: max-content;
     padding: 1em;
     margin: 1em;
+}
+
+.funcButton {
+    width: max-content;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    padding: 1px;
 }
