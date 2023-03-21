@@ -59,20 +59,37 @@ div.dark {
 }
 
 div.info {
-    width: 40vw;
+    width: 80vw;
     padding: 1em;
     padding-top: 3em;
     position: absolute;
     transition: opacity 1s ease;
 }
 
+div.info p{
+    width: 40vw;
+}
+
+
+
 div.left {
     left: 0;
     text-align: left;
 }
+
+div.left h2 {
+    width: 40vw;
+
+}
 div.right {
     right: 0;
     text-align: right;
+
+}
+
+div.right p {
+    position: absolute;
+    right: 1vw;
 }
 
 div.big {
@@ -151,4 +168,18 @@ div.whiteText {
     color: white;
     text-decoration: none;
     padding: 1px;
+}
+
+img.ilus {
+    height: 70vh;
+    width: fit-content;
+    position: absolute;
+    top : -1vh;
+}
+
+img.left {
+    right:-5vw;
+}
+img.right {
+    left:-15vw;
 }
