@@ -27,14 +27,18 @@
       </nav>
     </div>
     <div class="whiteText">
-        <h1>Greeting <% if(data.username != null) { %> <%= data.username %> <% } %>!</h1>
+        <h1>Greeting <% if(data.username != undefined) { %> <%= data.username %> <% } %>!</h1>
         <h2>Your review:</h2>
         <a href="/add">Add Review +</a>
-        <% if(data.reviews!=null) { %> 
-        <% data.reviews.forEach(review => {
-          
-        }) %>  
-          
+        <% if(data.reviews!=undefined) { %> 
+        <% data.reviews.forEach(review => { %>
+          <div class="reviews">
+            <a href="/edit?id=<%= review.id %>">Edit</a>
+            <h2><%= review.title %></h2>  
+            <p><%= review.body %></p>
+            <h3>Rating:<%= review.rating %></h2>
+          </div>
+        <% }) %>  
         <% } %>
     </div>
   </body>

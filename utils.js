@@ -3,7 +3,9 @@ module.exports = {
     createNewUser,
     checkAuth,
     getAllReviewsByUsername,
-    addNewReview
+    addNewReview,
+    getReviewById,
+    updateReviewById
 }
 const db = require("./models");
 const {users, reviews} = require("./models");
@@ -36,7 +38,18 @@ function getAllReviewsByUsername(username) {
 }
 
 function addNewReview(title, body, rating, image, users_username) {
-    console.log(body);
     reviews.create({title, body, rating, image, users_username});
     return reviews;
+}
+
+function getReviewById(id) {
+    const review = reviews.findByPk(id);
+    return review;
+}
+
+function updateReviewById(id, title, body, rating) {
+    const updatedReview = reviews.update({title, body, rating}, {
+        where: {id}
+    });
+    return updatedReview;
 }

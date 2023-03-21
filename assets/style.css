@@ -105,6 +105,11 @@ div.whiteText {
     height: 80vh;
 }
 
+#edit {
+    width: 100%;
+    height: 80vh;
+}
+
 #review-body {
     width: 50%;
     height: 50%;
@@ -130,4 +135,12 @@ div.whiteText {
 #add-img {
     background-color: white;
     color: black;
+}
+
+.reviews {
+    border: 5px solid white;
+    width: 80vw;
+    height: max-content;
+    padding: 1em;
+    margin: 1em;
 }

@@ -15,6 +15,8 @@ const {
     checkAuth,
     getAllReviewsByUsername,
     addNewReview,
+    getReviewById,
+    updateReviewById,
 
 } = require("./utils");
 const session = require("express-session");
@@ -22,6 +24,7 @@ env.config();
 const PORT = process.env.PORT;
 const connectionString = process.env.DATABASE_URL;
 const multer = require("multer");
+const { profile } = require("console");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "images");
@@ -32,7 +35,10 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({storage: storage});
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+
 app.use("/", express.static(__dirname + '/assets'));
 app.use(session ({
     secret:"lol",
@@ -99,6 +105,23 @@ app.get("/add", checkAuth, (req, res, next) => {
 app.post("/add", upload.single('img'),  (req, res, next) => {
     if (req.body.path === undefined) {req.body.path = null};
     addNewReview(req.body.title, req.body.body, req.body.rating, req.body.path, req.user.username);
+    res.redirect("/profile");
+})
+let count = [];
+app.get("/edit", checkAuth, async (req, res, next) => {
+    count.push(req.query.id);
+    const review = await getReviewById(req.query.id);
+    res.render("edit", {data: {
+        title: review.title,
+        body: review.body,
+        rating: review.rating,
+        id: req.query.id
+    }});
+})
+
+app.post("/edit",upload.single('img'), async (req, res, next) => {
+    console.log(req.body, "\n\n");
+    await updateReviewById(req.body.id,req.body.title, req.body.body, req.body.rating)
     res.redirect("/profile");
 })
 
