@@ -97,8 +97,8 @@ app.get("/add", checkAuth, (req, res, next) => {
 })
 
 app.post("/add", upload.single('img'),  (req, res, next) => {
-
-    addNewReview(req.body.title, req.body.body, req.body.rating, req.file.path, req.user.username);
+    if (req.body.path === undefined) {req.body.path = null};
+    addNewReview(req.body.title, req.body.body, req.body.rating, req.body.path, req.user.username);
     res.redirect("/profile");
 })
 

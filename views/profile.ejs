@@ -30,7 +30,12 @@
         <h1>Greeting <% if(data.username != null) { %> <%= data.username %> <% } %>!</h1>
         <h2>Your review:</h2>
         <a href="/add">Add Review +</a>
-        <% if(data.reviews!=null) { %> <%= data.reviews %> <% } %>
+        <% if(data.reviews!=null) { %> 
+        <% data.reviews.forEach(review => {
+          
+        }) %>  
+          
+        <% } %>
     </div>
   </body>
 </html>

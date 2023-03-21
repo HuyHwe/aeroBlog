@@ -36,6 +36,7 @@ function getAllReviewsByUsername(username) {
 }
 
 function addNewReview(title, body, rating, image, users_username) {
+    console.log(body);
     reviews.create({title, body, rating, image, users_username});
     return reviews;
 }
